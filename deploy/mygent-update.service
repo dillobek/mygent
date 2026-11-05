@@ -1,0 +1,11 @@
+[Unit]
+Description=Update Mygent from GitHub and redeploy
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/mygent
+ExecStart=/opt/mygent/deploy/update.sh
+

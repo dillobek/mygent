@@ -51,6 +51,19 @@ npm start
 Serverda Nginx 80/443 → `localhost:3000` (sayt) ga yo‘naltiriladi. Sayt `/api/*` so‘rovlarini o‘zi NestJS ga (`API_URL`) uzatadi,
 shuning uchun 4000-portni tashqariga ochish shart emas.
 
+### Server deploy
+
+Production deploy Docker orqali ishlaydi:
+
+```bash
+docker compose up -d --build
+```
+
+- sayt hostda faqat `127.0.0.1:4701` portida ochiladi;
+- `restart: unless-stopped` konteynerni xato yoki server rebootidan keyin qayta ishga tushiradi;
+- `deploy/mygent-update.timer` GitHub `main` branch'ini har daqiqada tekshiradi;
+- `deploy/nginx.mygent.uz.conf` domen va HTTPS reverse-proxy konfiguratsiyasi.
+
 ## Sozlamalar
 
 | Fayl | Nima |

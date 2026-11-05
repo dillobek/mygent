@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: mygent-app
+    restart: unless-stopped
+    env_file:
+      - ./apps/api/.env
+    environment:
+      NODE_ENV: production
+      PORT: "4000"
+      API_URL: http://127.0.0.1:4000
+      NEXT_PUBLIC_SITE_URL: https://mygent.uz
+    ports:
+      - "127.0.0.1:4701:3000"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:3000').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
