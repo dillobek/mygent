@@ -1,0 +1,23 @@
+{
+  "name": "mygent",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mygent — rasmiy sayt (Next.js) va API (NestJS)",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm run start:dev -w api\" \"npm run dev -w web\"",
+    "build": "npm run build -w api && npm run build -w web",
+    "start": "concurrently -k -n api,web -c cyan,magenta \"npm run start:prod -w api\" \"npm run start -w web\"",
+    "chat-id": "npm run chat-id -w api",
+    "test:telegram": "npm run test:telegram -w api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
